@@ -1,0 +1,43 @@
+package workout_practice_for_obj;
+
+
+/**
+ * 헬스장 회원 등록 시스템 예시로 설명하는 클래스와 객체 개념
+ */
+public class GymRegister {
+    public static String gymName = "대전 중구 짐";
+    public String memberName;
+    public String address;
+    public String gender;
+    public int age;
+
+
+    public GymRegister(String name, String address, String gender, int age){
+        this.address = address;
+        this.age = age;
+        this.gender = gender;
+        this.memberName = name;
+    }
+
+    public void displayName() {
+        System.out.println("--- " + gymName + " 회원 정보 ---"); // 모든 객체가 클래스 변수를 사용
+        System.out.println("이름: " + memberName);
+        System.out.println("나이: " + age);
+        System.out.println("성별: " + gender);
+        System.out.println("주소: " + address);
+        System.out.println("--------방문을 환영합니다.---------");
+    }
+    public static void main(String[] args) {
+        // 클래스 변수는 클래스 이름으로 직접 접근할 수 있습니다.
+        System.out.println("현재 헬스장 지점 이름: " + gymName);
+        System.out.println();
+
+        // 첫 번째 객체 생성
+        GymRegister member1 = new GymRegister("이창현", "서울시 강남구","남", 29);
+        member1.displayName();
+
+        // 두 번째 객체 생성
+//        Workout member2 = new Workout("김민지", "서울시 서초구","여", 25);
+//        member2.displayName();
+    }
+}
