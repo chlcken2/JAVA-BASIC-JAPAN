@@ -12,14 +12,17 @@ public class Basic15 {
          */
 
         Scanner sc = new Scanner(System.in);
+        int studentNumber = sc.nextInt();
+        String studentName = sc.next();
         int korScore = sc.nextInt();
         int engScore = sc.nextInt();
-        int mathScore = sc.nextInt();
+        int mathScore = sc.nextInt(); //camel
 
         int totalScore = korScore+engScore+mathScore;
-        int avgScore = totalScore/3;
+        float avgScore = totalScore/3.0f;
         String result = avgScore >= 80 ? "합격" : "탈락";
 
-        System.out.println("총점: " + totalScore + " 평균: " + avgScore + " 합격유무: " + result);
+
+        System.out.println("학번: " + studentNumber + " 이름: " + studentName+ " 총점: " + totalScore + " 평균: " + avgScore + " 합격유무: " + result);
     }
 }
