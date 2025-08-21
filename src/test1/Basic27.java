@@ -9,7 +9,7 @@ public class Basic27 {
 		// 1. 예금, 2.출금, 3.조회 4.종료
 		// 메뉴선택:
 		// 예금액 입력:
-//		System.out.println("@@@@@@@@1. 예금, 2. 출금, 3. 조회, 4.종료 start");
+
 		int initAccount = 0; // 초기 금액
 		int addAccount = 0; // 예금 금액
 		int minusAccount = 0; // 출금 금액
@@ -24,7 +24,7 @@ public class Basic27 {
 
 			if (menu == 4) {
 				System.out.println("종료 ");
-				break;
+				return;
 			}
 
 			switch (menu) {
