@@ -4,20 +4,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Member {
-//    int memberCount = 0; // 추후 계선
-    String[][] memberList = new String[3][3]; // 회원 row
-
-    /**
-     * 회원 등록
-     * 예외처리: use validation method
-     * @param id
-     * @param pw
-     * @param phone
-     */
+    String[][] memberList = new String[3][3]; // 회원 저장 테이블
 
     public void register(Scanner sc) {
-        System.out.println("---------유저 등록 시작---------");
+
         for(int i = 0; i < memberList.length; i++) {
+            System.out.println("---------"+ (i+1) + "번째 유저 등록 시작---------");
             System.out.print("---id: ");
             String id = sc.next();
             System.out.print("---pw: ");
@@ -32,8 +24,8 @@ public class Member {
         }
 
 
-        for(int i = 0; i < this.memberList.length; i++) {
-            System.out.println("---정상 등록된 회원 : " + Arrays.toString(this.memberList[i]));
+        for (String[] members : this.memberList) {
+            System.out.println("---정상 등록된 회원 : " + Arrays.toString(members));
         }
     }
 
@@ -51,6 +43,7 @@ public class Member {
             System.out.println("---등록된 회원 pw : " + members[1]);
             System.out.println("---등록된 회원 phone : " + members[2]);
         }
+        System.out.println("---------전체 조회 끝---------");
     }
 
     /**
@@ -120,27 +113,7 @@ public class Member {
     }
 
     /**
-     * id기반 삭제
+     * id 기반 미구현
      */
     public void delete(Scanner sc){}
-
-
-
-    /**
-     * id validation method
-     * id가 중복되는지,
-     * id가 존
-     * @param String Type id
-     * @return boolean
-     */
-    private boolean isDuplicateId(String id) {
-
-        return false;
-    }
-
-    private boolean isExistId(String id) {
-
-        return false;
-    }
-
 }
