@@ -36,6 +36,7 @@ public class Member {
      * 회원 등록 (생성자 사용)
      */
     public void register(Scanner sc) {
+
         for (int i = 0; i < memberList.length; i++) {
             System.out.println("---------"+ (i+1) + "번째 유저 등록 시작---------");
 
