@@ -1,9 +1,9 @@
-package employee;
+package employee_v1.employee;
 
 import java.util.Scanner;
 
 /**
- * utils　메소드로 구현한 과제
+ * 리스트 + 내부 메소드를 통해 값을 출력
  */
 public class EmpMain {
     /**
@@ -62,12 +62,14 @@ public class EmpMain {
      * - 지급액 계산 -> 급여 + 보너스
      * - 메시지 출력 메소드
      */
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         EmpDao empDao = new EmpDao();
         int empArrayIndex = -1;
         while(true) {
-            System.out.println("[1]사원등록\t[2]사원출력\t[3]사원검색\t[4]사원수정\t[5]사원삭제\t[0]종료");
+            System.out.println("[1]사원등록\t[2]사원출력\t[3]사원검색\t[4]사원수정\t[5]사원삭제\t[0]종료   -  v1 배열 적용");
             int type = sc.nextInt();
             switch (type) {
                 case 1:

@@ -1,8 +1,5 @@
-package employee;
+package employee_v1.employee;
 
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -20,6 +17,10 @@ public class EmpDao {
      * @param sc
      */
 
+    String[] defaultPositionKR = {"이사", "부장", "과장", "대리", "사원"};
+    int[] defaultBasePay = {600, 500, 400, 300, 260};
+    int[] defaultBonus = {100, 50, 30, 20, 10};
+
     Emp[] empInfo = new Emp[3];
     public void insert(Scanner sc) {
         for(int i = 0; i< this.empInfo.length; i++) {
@@ -30,13 +31,13 @@ public class EmpDao {
             System.out.print("회원 등록 직급 1 = 이사, 2 = 부장, 3 = 과장, 4 = 대리: 5=사원 ");
             int position = sc.nextInt();
 
-            if(!EmpUtils.checkPositionType(position)) {
+            if(!this.checkPositionType(position)) {
                 System.out.println("올바른 회원 직급 번호를 입력하세요.");
                 continue;
             }
 
-            int basePay = EmpUtils.pickBasePay(position);
-            int bonus = EmpUtils.pickBonus(position);
+            int basePay = this.defaultBasePay[position];
+            int bonus = this.defaultBonus[position];
             empInfo[i] = new Emp(empNum,name,position, basePay, bonus);
 
             System.out.println("회원번호 :" + empNum + "회원이 등록되었습니다.");
@@ -55,7 +56,7 @@ public class EmpDao {
             if(editType.equalsIgnoreCase("y")) {
                 System.out.println("직급 [1:이사\t2:부장\t3:과장\t4:대리\t5:사원] :");
                 int position = sc.nextInt();
-                if(!EmpUtils.checkPositionType(position)) {
+                if(!this.checkPositionType(position)) {
                     System.out.println("올바른 회원 직급 번호를 입력하세요.");
                     return;
                 }
@@ -78,11 +79,11 @@ public class EmpDao {
 
     public void searchAll(){
         boolean hasEmp = false;
-        System.out.println("사원번호  이름  직급  급여  보너스  지급액");
+        System.out.println("사원번호\t이름\t직급\t급여\t보너스\t지급액");
         for(int i = 0; i< this.empInfo.length; i++) {
             if(empInfo[i] != null) {
                 hasEmp = true;
-                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + EmpUtils.pickPosition(this.empInfo[i].position) + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
+                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + this.defaultPositionKR[this.empInfo[i].position] + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + this.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
             }
         }
 
@@ -104,7 +105,7 @@ public class EmpDao {
                 hasEmp = true;
                 empIndex = i;
                 System.out.println("사원번호\t이름\t직급\t급여\t보너스\t지급액");
-                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + EmpUtils.pickPosition(this.empInfo[i].position) + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
+                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + this.defaultPositionKR[this.empInfo[i].position] + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + this.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
             }
         }
         if(!hasEmp) {
@@ -120,5 +121,12 @@ public class EmpDao {
     public void delete(Scanner sc, int index){
         System.out.println("사원번호 " +empInfo[index].empNum + "이름 : " + empInfo[index].name + "인 사원이 삭제되었습니다.");
         empInfo[index] = null;
+    }
+
+    private int calcTotalPay(int basePay, int bonus){
+        return basePay+bonus;
+    }
+    private boolean checkPositionType(int position) {
+        return position >= 1 && position <= 5;
     }
 }
