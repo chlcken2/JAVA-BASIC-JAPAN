@@ -62,15 +62,16 @@ public class EmpMain {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         EmpDao empDao = new EmpDao();
+        int empArrayIndex = -1;
         while(true) {
-            System.out.println("[1]사원등록 [2]사원출력 [3]사원검색 [4]사원수정 [5]사원삭제 [0]종료");
+            System.out.println("[1]사원등록\t[2]사원출력\t[3]사원검색\t[4]사원수정\t[5]사원삭제\t[0]종료");
             int type = sc.nextInt();
             switch (type) {
                 case 1:
                     empDao.insert(sc);
                     break;
                 case 2:
-                    System.out.println("전체 회원 사원 검색 :");
+                    System.out.println("전체 사원 검색 :");
                     empDao.searchAll();
                     break;
                 case 3:
@@ -78,13 +79,17 @@ public class EmpMain {
                     empDao.search(sc);
                     break;
                 case 4:
-                    empDao.edit(sc);
+                    System.out.println("수정 싶은 사원번호 입력 :");
+                    empArrayIndex = empDao.search(sc);
+                    if(empArrayIndex >= 0) {
+                        empDao.edit(sc, empArrayIndex);
+                    }
                     break;
                 case 5:
                     System.out.println("삭제 싶은 사원번호 입력 :");
-                    int empIndex =empDao.search(sc);
-                    if(empIndex >= 0) {
-                        empDao.delete(sc, empIndex);
+                    empArrayIndex =empDao.search(sc);
+                    if(empArrayIndex >= 0) {
+                        empDao.delete(sc, empArrayIndex);
                     }
                     break;
                 case 0:

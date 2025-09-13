@@ -43,30 +43,24 @@ public class EmpDao {
         }
     }
 
-    public void edit(Scanner sc){
-        System.out.println("수정 싶은 사원번호 입력 :");
-        String empNum = sc.next();
-        System.out.println("사원번호  이름  직급  급여  보너스  지급액");
+    public void edit(Scanner sc, int index){
         boolean hasEmp = false;
         boolean isEdited = false;
 
-        for(int i = 0; i< this.empInfo.length; i++) {
-            if(empInfo[i] != null && empInfo[i].empNum.equalsIgnoreCase(empNum)) {
-                hasEmp = true;
-                System.out.println(this.empInfo[i].empNum + "  " + this.empInfo[i].name + "  " + EmpUtils.pickPosition(this.empInfo[i].position) + "  " + this.empInfo[i].basePay + "  " + this.empInfo[i].bonus + "  " + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
-                System.out.println("수정할래요[y/n] :");
-                String editType = sc.next();
+        if(empInfo[index] != null) {
+            hasEmp = true;
+            System.out.println("수정할래요[y/n] :");
+            String editType = sc.next();
 
-                if(editType.equalsIgnoreCase("y")) {
-                    System.out.println("직급[1:이사, 2:부장, 3:과장, 4:대리, 5:사원] :");
-                    int position = sc.nextInt();
-                    if(!EmpUtils.checkPositionType(position)) {
-                        System.out.println("올바른 회원 직급 번호를 입력하세요.");
-                        return;// 구현 귀찮아서 그냥 종료처리
-                    }
-                    empInfo[i] = new Emp(empNum,this.empInfo[i].name,position, this.empInfo[i].basePay, this.empInfo[i].bonus);
-                    isEdited = true;
+            if(editType.equalsIgnoreCase("y")) {
+                System.out.println("직급 [1:이사\t2:부장\t3:과장\t4:대리\t5:사원] :");
+                int position = sc.nextInt();
+                if(!EmpUtils.checkPositionType(position)) {
+                    System.out.println("올바른 회원 직급 번호를 입력하세요.");
+                    return;
                 }
+                empInfo[index] = new Emp(this.empInfo[index].empNum, this.empInfo[index].name, position, this.empInfo[index].basePay, this.empInfo[index].bonus);
+                isEdited = true;
             }
         }
 
@@ -77,21 +71,21 @@ public class EmpDao {
             System.out.println("수정을 취소했습니다.다시 확인 바랍니다.");
             System.out.println();
         } else {
-            System.out.println("수정 완료되었습니다." +empNum +"회원의 사원번호 확인 바랍니다.");
+            System.out.println("수정 완료되었습니다." +this.empInfo[index].empNum +"회원의 사원번호 확인 바랍니다.");
             System.out.println();
         }
     }
 
     public void searchAll(){
-        System.out.println("사원번호  이름  직급  급여  보너스  지급액");
         boolean hasEmp = false;
-
+        System.out.println("사원번호  이름  직급  급여  보너스  지급액");
         for(int i = 0; i< this.empInfo.length; i++) {
             if(empInfo[i] != null) {
                 hasEmp = true;
-                System.out.println(this.empInfo[i].empNum + "  " + this.empInfo[i].name + "  " + EmpUtils.pickPosition(this.empInfo[i].position) + "  " + this.empInfo[i].basePay + "  " + this.empInfo[i].bonus + "  " + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
+                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + EmpUtils.pickPosition(this.empInfo[i].position) + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
             }
         }
+
         if(!hasEmp) {
             System.out.println("검색된 회원이 없습니다. 사원번호 확인 바랍니다.");
             System.out.println();
@@ -103,14 +97,14 @@ public class EmpDao {
 
     public int search(Scanner sc){
         String empNum = sc.next();
-        System.out.println("사원번호  이름  직급  급여  보너스  지급액");
         boolean hasEmp = false;
         int empIndex = -1;
         for(int i = 0; i< this.empInfo.length; i++) {
             if(empInfo[i] != null && empInfo[i].empNum.equalsIgnoreCase(empNum)) {
                 hasEmp = true;
                 empIndex = i;
-                System.out.println(this.empInfo[i].empNum + "  " + this.empInfo[i].name + "  " + EmpUtils.pickPosition(this.empInfo[i].position) + "  " + this.empInfo[i].basePay + "  " + this.empInfo[i].bonus + "  " + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
+                System.out.println("사원번호\t이름\t직급\t급여\t보너스\t지급액");
+                System.out.println(this.empInfo[i].empNum + "\t" + this.empInfo[i].name + "\t" + EmpUtils.pickPosition(this.empInfo[i].position) + "\t" + this.empInfo[i].basePay + "\t" + this.empInfo[i].bonus + "\t" + EmpUtils.calcTotalPay(this.empInfo[i].basePay, this.empInfo[i].bonus));
             }
         }
         if(!hasEmp) {

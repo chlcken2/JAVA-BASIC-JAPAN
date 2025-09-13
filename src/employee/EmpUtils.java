@@ -54,7 +54,7 @@ public class EmpUtils {
     }
 
     static public boolean checkPositionType(int position) {
-        return position >= 1 && position <= 4;
+        return position >= 1 && position <= 5;
     }
 
 }
